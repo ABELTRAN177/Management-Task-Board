@@ -46,7 +46,7 @@ function handleAddTask(event) {
     const description = document.getElementById('taskDescription').value;
     const dueDate = document.getElementById('taskDueDate').value;
 
-    // generates a new task object with the provided title, description, and due date
+    // generates a new task object with the provided title, description, and due dates
     const newTask = {
         id: generateTaskId(),
         title: title,
