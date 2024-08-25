@@ -14,3 +14,20 @@ body {
 .task-card:hover {
   cursor: grab;
 }
+
+/* underlines the title of each task  */
+.underline {
+  text-decoration: underline;
+ }
+ 
+ /* changes the color of the header and footer when the
+ user drags the card through each field  */
+ .card-header.blue, .card-footer.blue {
+  background-color: rgb(3, 95, 125) !important;
+ }
+ 
+ 
+ .card-header.green, .card-footer.green {
+  background-color: rgb(0, 78, 0) !important;
+ }
+ 
