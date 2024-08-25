@@ -90,4 +90,26 @@ function handleDeleteTask(event) {
 
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
+// funtion will be called when the page loads
+$(document).ready(function () {
+
+    // makes the todo, in-progress, and done lanes droppable
+    // additional code under "create a task card" function
+    $("#todo, #in-progress, #done").droppable({
+        accept: ".task",
+        tolerance: "intersect",
+        drop: function (event, ui) {
+            // this removes the blue and green classes from the card header and footer
+            // when the card is dropped in a different field
+            ui.draggable.detach().appendTo($(this));
+            ui.draggable.find('.card-header, .card-footer').removeClass('blue green');
+            // changes the color of the card header and footer based on the field it is dropped in
+            if ($(this).attr('id') === 'in-progress') {
+                ui.draggable.find('.card-header, .card-footer').addClass('blue');
+            } else if ($(this).attr('id') === 'done') {
+                ui.draggable.find('.card-header, .card-footer').addClass('green');
+            }
+        }
+    });
+});
 
