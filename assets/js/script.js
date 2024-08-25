@@ -65,7 +65,50 @@ function handleAddTask(event) {
 }
 
 // Todo: create a function to create a task card
-
+// adds event listener to the save button so when clicked it i will be called
+document.getElementById('saveTaskButton').addEventListener('click', function() {
+    // Get form values
+    var title = document.getElementById('taskTitle').value;
+    var description = document.getElementById('taskDescription').value;
+    var dueDate = document.getElementById('taskDueDate').value;
+    // div element to hold the task card
+     var task = document.createElement('div');
+    //  returned color is stored in the color variable
+    var color = dueDateColorChange(dueDate);
+    task.innerHTML = `
+    <div class="card task" id="${title}">
+        <div class="card-header" style="background-color: ${color};">
+            <h5 class="card-title underline">${title}</h5>
+        </div>
+        <div class="card-body">
+            <p class="card-text">${description}</p>
+            <p class="card-text">Due ${dueDate}</p>
+        </div>
+        <div class="card-footer" style="background-color: ${color};">
+            <button class="btn btn-danger delete-task">Delete</button>
+        </div>
+    </div>
+    `;
+    document.getElementById('todo-cards').appendChild(task);
+ 
+ 
+ //makes the task draggable using JQuery
+ $(function() {
+    $(".task").draggable({
+        revert: "invalid",
+        cursor: "move",
+        helper: "clone",
+        opacity: 0.5
+    });
+ 
+    // will fire when the delete button is clicked
+    task.querySelector('.delete-task').addEventListener('click', handleDeleteTask);
+ 
+ // Clears the form
+    document.getElementById('taskForm').reset();
+  });
+ });
+ 
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event) {
