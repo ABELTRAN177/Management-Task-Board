@@ -1,5 +1,5 @@
 // Retrieve tasks and nextId from localStorage
-let taskList = JSON.parse(localStorage.getItem("tasks")) ;
+let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 
 // Todo: create a function to generate a unique task id
@@ -38,11 +38,55 @@ function renderTaskList() {
 }
 
 // Todo: create a function to handle adding a new task
+function handleAddTask(event) {
+    event.preventDefault();
+
+    // Get the values of the input fields
+    const title = document.getElementById('taskTitle').value;
+    const description = document.getElementById('taskDescription').value;
+    const dueDate = document.getElementById('taskDueDate').value;
+
+    // generates a new task object with the provided title, description, and due date
+    const newTask = {
+        id: generateTaskId(),
+        title: title,
+        description: description,
+        dueDate: dueDate
+    };
+    //  pushes task to taskList array and saves it to local storage
+    taskList.push(newTask);
+    localStorage.setItem('tasks', JSON.stringify(taskList));
+    renderTaskList();
+    // clears all input fields after adding a task
+    document.getElementById('taskForm').reset();
+
+    // Hide the modal after adding a task
+    $(`#formModal`).modal(`hide`);
+}
 
 // Todo: create a function to create a task card
 
 
 // Todo: create a function to handle deleting a task
+function handleDeleteTask(event) {
+    var taskElement = event.target.closest('.task');
+    if (taskElement) {
+        // Remove the task from taskList
+        // if task element is not found it will be null and will be skipped
+        var taskId = taskElement.id;
+        // creates a new array that only includes tasks that do not have the same id as the task id
+        // removes the task from the taskList array and saves it to local storage
+        taskList = taskList.filter(task => task.id !== taskId);
+        localStorage.setItem('tasks', JSON.stringify(taskList));
+
+
+        // Remove the task element from the DOM
+        // if the task element is found, it will be removed
+        taskElement.remove();
+    } else {
+        console.log('Task not found');
+    }
+}
 
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
