@@ -67,7 +67,6 @@ function handleAddTask(event) {
 // Todo: create a function to create a task card
 // adds event listener to the save button so when clicked it i will be called
 document.getElementById('saveTaskButton').addEventListener('click', function() {
-    // Get form values
     var title = document.getElementById('taskTitle').value;
     var description = document.getElementById('taskDescription').value;
     var dueDate = document.getElementById('taskDueDate').value;
